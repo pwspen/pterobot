@@ -42,6 +42,7 @@
     <geom conaffinity="1" condim="3" material="MatPlane" name="floor" pos="0 0 0" rgba="0.8 0.9 0.8 1" size="40 40 40" type="plane"/>
     <!-- <geom type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="torso"/> -->
     <body name="torso" pos="0 0 0.2">
+      <camera name="side" pos="0 -3 1" xyaxes="1 0 0 0 1 2" mode="trackcom"/>
       <joint armature="0" damping="0" limited="false" margin="0.01" name="root" pos="0 0 0" type="free"/>
       <geom type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="torso"/>
       <!-- <inertial pos="0 0 0.000645734" quat="0.707105 0 0 0.707108" mass="0.00055216 -->
