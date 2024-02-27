@@ -1,0 +1,154 @@
+<mujoco model="Pterobot">
+  <compiler angle="radian"/>
+  <option integrator="RK4" timestep="0.01"/>
+
+
+  <asset>
+    <mesh name="torso" file="meshes/torso.STL"/>
+    <mesh name="NeckBase" file="meshes/NeckBase.STL"/>
+    <mesh name="Neck" file="meshes/Neck.STL"/>
+    <mesh name="Head" file="meshes/Head.STL"/>
+    <mesh name="LWingBase" file="meshes/LWingBase.STL"/>
+    <mesh name="LWingProx" file="meshes/LWingProx.STL"/>
+    <mesh name="LWingDist" file="meshes/LWingDist.STL"/>
+    <mesh name="LWingPhal" file="meshes/LWingPhal.STL"/>
+    <mesh name="RWingBase" file="meshes/RWingBase.STL"/>
+    <mesh name="RWingProx" file="meshes/RWingProx.STL"/>
+    <mesh name="RWingDist" file="meshes/RWingDist.STL"/>
+    <mesh name="RWingPhal" file="meshes/RWingPhal.STL"/>
+    <mesh name="LLegBase" file="meshes/LLegBase.STL"/>
+    <mesh name="LLegProx" file="meshes/LLegProx.STL"/>
+    <mesh name="LLegDist" file="meshes/LLegDist.STL"/>
+    <mesh name="RLegBase" file="meshes/RLegBase.STL"/>
+    <mesh name="RLegProx" file="meshes/RLegProx.STL"/>
+    <mesh name="RLegDist" file="meshes/RLegDist.STL"/>
+  </asset>
+
+    <default>
+      <joint armature="1" damping="0.1" limited="true"/>
+      <geom conaffinity="0" condim="3" density="5.0" friction="1 0.5 0.5" margin="0.01" rgba="0.8 0.6 0.4 1"/>
+    </default>
+
+    <asset>
+      <texture builtin="gradient" height="100" rgb1="1 1 1" rgb2="0 0 0" type="skybox" width="100"/>
+      <texture builtin="flat" height="1278" mark="cross" markrgb="1 1 1" name="texgeom" random="0.01" rgb1="0.8 0.6 0.4" rgb2="0.8 0.6 0.4" type="cube" width="127"/>
+      <texture builtin="checker" height="100" name="texplane" rgb1="0 0 0" rgb2="0.8 0.8 0.8" type="2d" width="100"/>
+      <material name="MatPlane" reflectance="0.5" shininess="1" specular="1" texrepeat="60 60" texture="texplane"/>
+      <material name="geom" texture="texgeom" texuniform="true"/>
+    </asset>
+
+  <worldbody>
+    <light cutoff="100" diffuse="1 1 1" dir="-0 0 -1.3" directional="true" exponent="1" pos="0 0 1.3" specular=".1 .1 .1"/>
+    <geom conaffinity="1" condim="3" material="MatPlane" name="floor" pos="0 0 0" rgba="0.8 0.9 0.8 1" size="40 40 40" type="plane"/>
+    <!-- <geom type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="torso"/> -->
+    <body name="torso" pos="0 0 0.2">
+      <joint armature="0" damping="0" limited="false" margin="0.01" name="root" pos="0 0 0" type="free"/>
+      <geom type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="torso"/>
+      <!-- <inertial pos="0 0 0.000645734" quat="0.707105 0 0 0.707108" mass="0.00055216 -->
+      <body name="NeckBase" pos="-0.17145 0 0" quat="0.707105 0 0 0.707108">
+        <inertial pos="0.000645734 8.91529e-09 0.0057037" quat="0.993453 0 -0.114245 0" mass="0.00055216" diaginertia="1.4102e-08 1.28003e-08 7.76405e-09"/>
+        <joint name="NeckUpDown" pos="0 0 0" axis="-1 0 0" range="0.5 1.5"/>
+        <geom type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="NeckBase"/>
+        <body name="Neck" pos="0 0 0.0127">
+          <inertial pos="-0.000127501 1.76034e-09 0.0698158" quat="1 0 -0.000232522 0" mass="0.00279643" diaginertia="3.03954e-06 3.03856e-06 2.66414e-08"/>
+          <joint name="NeckYaw" pos="0 0 0" axis="0 0 1" range="-1.3 1.3"/>
+          <geom type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="Neck"/>
+          <body name="Head" pos="0 0 0.127" quat="0.707105 -0.707108 0 0">
+            <inertial pos="8.60607e-05 1.18819e-09 0.0943231" quat="1 0 -5.67425e-05 0" mass="0.00414299" diaginertia="1.23841e-05 1.23832e-05 3.77727e-08"/>
+            <joint name="HUpDown" pos="0 0 0" axis="1 0 0" range="-1 1"/>
+            <geom type="mesh" rgba="0.298039 0.298039 0.298039 1" mesh="Head"/>
+          </body>
+        </body>
+      </body>
+      <body name="LWingBase" pos="-0.0762 -0.06985 0" quat="-2.59734e-06 2.59735e-06 0.707108 -0.707105">
+        <inertial pos="-8.91529e-09 -0.000645734 0.0069963" quat="0.702477 0.0807837 -0.0807837 0.702477" mass="0.00055216" diaginertia="1.4102e-08 1.28003e-08 7.76405e-09"/>
+        <joint name="LShouldRot" pos="0 0 0" axis="0 0 1" range="-0.3 1.5"/>
+        <geom type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="LWingBase"/>
+        <body name="LWingProx" pos="0 0 0.0127" quat="0.707105 0 0.707108 0">
+          <inertial pos="-0.000122961 0.000122961 0.05715" quat="0.923879 0.000245025 -0.000591543 0.382683" mass="0.00289974" diaginertia="1.57844e-06 1.57844e-06 3.10198e-08"/>
+          <joint name="LShouldExt" pos="0 0 0" axis="0 1 0" range="-1.8 0.3"/>
+          <geom type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="LWingProx"/>
+          <body name="LWingDist" pos="0 0 0.1143" quat="0.707105 -0.707108 0 0">
+            <inertial pos="0 2.59262e-09 0.08255" quat="1 0 -0.00026879 0" mass="0.00379745" diaginertia="5.25117e-06 5.24922e-06 3.84414e-08"/>
+            <joint name="LElbow" pos="0 0 0" axis="-1 0 0" range="-1.3 1.3"/>
+            <geom type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="LWingDist"/>
+            <body name="LWingPhal" pos="0 0 0.1651" quat="0.707105 -0.707108 0 0">
+              <inertial pos="7.07339e-05 9.76582e-10 0.119368" quat="1 0 -2.90461e-05 0" mass="0.0050407" diaginertia="2.41642e-05 2.41632e-05 4.51933e-08"/>
+              <joint name="LWrist" pos="0 0 0" axis="-1 0 0" range="-1.3 1.3"/>
+              <geom type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="LWingPhal"/>
+            </body>
+          </body>
+        </body>
+      </body>
+      <body name="RWingBase" pos="-0.0762 0.06985 0" quat="-2.59734e-06 -2.59735e-06 0.707108 0.707105">
+        <inertial pos="-8.91529e-09 -0.000645734 0.0069963" quat="0.702477 0.0807837 -0.0807837 0.702477" mass="0.00055216" diaginertia="1.4102e-08 1.28003e-08 7.76405e-09"/>
+        <joint name="RShouldRot" pos="0 0 0" axis="0 0 -1" range="-0.3 1.5"/>
+        <geom type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="RWingBase"/>
+        <body name="RWingProx" pos="0 0 0.0127" quat="0.707105 0 0.707108 0">
+          <inertial pos="0.000122957 0.000122957 0.05715" quat="0.923879 0.000245008 0.000591501 -0.382683" mass="0.00289974" diaginertia="1.57844e-06 1.57844e-06 3.10198e-08"/>
+          <joint name="RShouldExt" pos="0 0 0" axis="0 1 0" range="-1.8 0.3"/>
+          <geom type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="RWingProx"/>
+          <body name="RWingDist" pos="0 0 0.1143" quat="-2.59734e-06 2.59735e-06 -0.707108 0.707105">
+            <inertial pos="0 2.59262e-09 0.08255" quat="1 0 -0.00026879 0" mass="0.00379745" diaginertia="5.25117e-06 5.24922e-06 3.84414e-08"/>
+            <joint name="RElbow" pos="0 0 0" axis="-1 0 0" range="-1.3 1.3"/>
+            <geom type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="RWingDist"/>
+            <body name="RWingPhal" pos="0 0 0.1651" quat="0.707105 -0.707108 0 0">
+              <inertial pos="7.07339e-05 9.76584e-10 0.119368" quat="1 0 -2.90461e-05 0" mass="0.0050407" diaginertia="2.41642e-05 2.41632e-05 4.51933e-08"/>
+              <joint name="RWrist" pos="0 0 0" axis="-1 0 0" range="-1.3 1.3"/>
+              <geom type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="RWingPhal"/>
+            </body>
+          </body>
+        </body>
+      </body>
+      <body name="LLegBase" pos="0.1524 -0.04445 0" quat="-0.707108 -0.707105 9.54059e-12 -5.1947e-06">
+        <inertial pos="-0.000645734 8.91529e-09 0.0069963" quat="0.993453 0 -0.114245 0" mass="0.00055216" diaginertia="1.4102e-08 1.28003e-08 7.76405e-09"/>
+        <joint name="LHipRot" pos="0 0 0" axis="0 0 1" range="-1.6 1.6"/>
+        <geom type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="LLegBase"/>
+        <body name="LLegProx" pos="0 0 0.0127" quat="0.499998 0.5 0.5 -0.500002">
+          <inertial pos="-0.000122957 -0.000122957 0.05715" quat="0.923879 -0.000245008 -0.000591501 -0.382683" mass="0.00289974" diaginertia="1.57844e-06 1.57844e-06 3.10198e-08"/>
+          <joint name="LHipExt" pos="0 0 0" axis="0 -1 0" range="-0.3 1.8"/>
+          <geom type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="LLegProx"/>
+          <body name="LLegDist" pos="0 0 0.1143" quat="0.707105 -0.707108 0 0">
+            <inertial pos="0.000151879 2.09691e-09 0.0450496" quat="1 0 -0.000454114 0" mass="0.00234758" diaginertia="1.56564e-06 1.56466e-06 2.29305e-08"/>
+            <joint name="LKnee" pos="0 0 0" axis="-1 0 0" range="-1.3 1.3"/>
+            <geom type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="LLegDist"/>
+          </body>
+        </body>
+      </body>
+      <body name="RLegBase" pos="0.1524 0.04445 0" quat="-2.59734e-06 -2.59735e-06 0.707108 0.707105">
+        <inertial pos="0.000645734 -8.91529e-09 0.0069963" quat="0.993453 0 0.114245 0" mass="0.00055216" diaginertia="1.4102e-08 1.28003e-08 7.76405e-09"/>
+        <joint name="RHipRot" pos="0 0 0" axis="0 0 -1" range="-1.6 1.6"/>
+        <geom type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="RLegBase"/>
+        <body name="RLegProx" pos="0 0 0.0127" quat="0.518464 0.480827 -0.480825 0.518466">
+          <inertial pos="-0.00434117 0.000122962 0.0569818" quat="0.910613 -0.015232 -0.0348032 0.41151" mass="0.00289974" diaginertia="1.57853e-06 1.57832e-06 3.10471e-08"/>
+          <joint name="RHipExt" pos="0 0 0" axis="0 1 0" range="-0.3 1.8"/>
+          <geom type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="RLegProx"/>
+          <body name="RLegDist" pos="-0.0086006 0 0.11398" quat="0.706604 -0.706607 -0.0266222 -0.0266223">
+            <inertial pos="0.000151881 -0.000100942 0.0450458" quat="0.998664 0.000137874 -0.000446302 -0.0516784" mass="0.00234758" diaginertia="1.56565e-06 1.56462e-06 2.29571e-08"/>
+            <joint name="RKnee" pos="0 0 0" axis="-1 0 0" range="-1.3 1.3"/>
+            <geom type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="RLegDist"/>
+          </body>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+  <actuator>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="NeckUpDown" gear="100"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="NeckYaw" gear="100"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="HUpDown" gear="100"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="LShouldRot" gear="100"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="LShouldExt" gear="100"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="LElbow" gear="100"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="LWrist" gear="100"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="RShouldRot" gear="100"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="RShouldExt" gear="100"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="RElbow" gear="100"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="RWrist" gear="100"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="LHipRot" gear="100"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="LHipExt" gear="100"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="LKnee" gear="100"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="RHipRot" gear="100"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="RHipExt" gear="100"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="RKnee" gear="100"/>
+  </actuator>
+</mujoco>

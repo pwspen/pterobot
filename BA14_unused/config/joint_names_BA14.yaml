@@ -1,0 +1,1 @@
+controller_joint_names: ['', 'NeckUpDown', 'NeckYaw', 'HUpDown', 'LShouldRot', 'LShouldExt', 'LElbow', 'LWrist', 'RShouldRot', 'RShouldExt', 'RElbow', 'RWrist', 'LHipRot', 'LHipExt', 'LKnee', 'RHipRot', 'RHipExt', 'RKnee', ]

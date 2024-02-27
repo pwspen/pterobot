@@ -1,0 +1,1033 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="Pterobot">
+  <link
+    name="torso">
+    <inertial>
+      <origin
+        xyz="0.00585234292922584 -4.61140632321342E-06 -1.91001349893364E-10"
+        rpy="0 0 0" />
+      <mass
+        value="0.0773188746224288" />
+      <inertia
+        ixx="6.9860296096866E-05"
+        ixy="1.40112923199812E-09"
+        ixz="4.97237598808152E-14"
+        iyy="0.000482895505579539"
+        iyz="2.80017694202807E-09"
+        izz="0.000552618237292802" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://BA14/meshes/torso.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://BA14/meshes/torso.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="NeckBase">
+    <inertial>
+      <origin
+        xyz="0.000645734028304206 8.91528981195044E-09 0.00570370451483394"
+        rpy="0 0 0" />
+      <mass
+        value="0.000552160381379268" />
+      <inertia
+        ixx="1.37754406098898E-08"
+        ixy="-1.03297312070412E-13"
+        ixz="1.40112923189962E-09"
+        iyy="1.28003109152368E-08"
+        iyz="-4.97237598467118E-14"
+        izz="8.09062527386862E-09" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://BA14/meshes/NeckBase.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://BA14/meshes/NeckBase.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="NeckUpDown"
+    type="revolute">
+    <origin
+      xyz="-0.17145 0 0"
+      rpy="0 0 1.5708" />
+    <parent
+      link="torso" />
+    <child
+      link="NeckBase" />
+    <axis
+      xyz="-1 0 0" />
+    <limit
+      lower="0.5"
+      upper="1.5"
+      effort="3"
+      velocity="0" />
+  </joint>
+  <link
+    name="Neck">
+    <inertial>
+      <origin
+        xyz="-0.000127501350431326 1.76033779220042E-09 0.0698158019260741"
+        rpy="0 0 0" />
+      <mass
+        value="0.00279643114473697" />
+      <inertia
+        ixx="3.03953806643145E-06"
+        ixy="1.03297312075808E-13"
+        ixz="1.40112923189963E-09"
+        iyy="3.03856293673679E-06"
+        iyz="4.9723759656622E-14"
+        izz="2.66420198842443E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://BA14/meshes/Neck.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://BA14/meshes/Neck.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="NeckYaw"
+    type="revolute">
+    <origin
+      xyz="0 0 0.0127"
+      rpy="0 0 0" />
+    <parent
+      link="NeckBase" />
+    <child
+      link="Neck" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.3"
+      upper="1.3"
+      effort="3"
+      velocity="0" />
+  </joint>
+  <link
+    name="Head">
+    <inertial>
+      <origin
+        xyz="8.60606560195873E-05 1.18819151739835E-09 0.0943230531777287"
+        rpy="0 0 0" />
+      <mass
+        value="0.00414299360275159" />
+      <inertia
+        ixx="1.23841470155012E-05"
+        ixy="-1.03297312067069E-13"
+        ixz="1.40112923189945E-09"
+        iyy="1.23831718858066E-05"
+        iyz="-4.97237594682395E-14"
+        izz="3.77728566504696E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://BA14/meshes/Head.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.298039215686275 0.298039215686275 0.298039215686275 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://BA14/meshes/Head.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="HUpDown"
+    type="revolute">
+    <origin
+      xyz="0 0 0.127"
+      rpy="-1.5708 0 0" />
+    <parent
+      link="Neck" />
+    <child
+      link="Head" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="-1"
+      upper="1"
+      effort="3"
+      velocity="0" />
+  </joint>
+  <link
+    name="LWingBase">
+    <inertial>
+      <origin
+        xyz="-8.91528981195044E-09 -0.000645734028303767 0.00699629548516618"
+        rpy="0 0 0" />
+      <mass
+        value="0.000552160381379266" />
+      <inertia
+        ixx="1.28003109152368E-08"
+        ixy="-1.03297312074626E-13"
+        ixz="-4.9723759856831E-14"
+        iyy="1.37754406098898E-08"
+        iyz="1.40112923189963E-09"
+        izz="8.09062527386861E-09" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://BA14/meshes/LWingBase.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://BA14/meshes/LWingBase.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="LShouldRot"
+    type="revolute">
+    <origin
+      xyz="-0.0762 -0.06985 0"
+      rpy="-1.5708 0 -3.1416" />
+    <parent
+      link="torso" />
+    <child
+      link="LWingBase" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-0.3"
+      upper="1.5"
+      effort="3"
+      velocity="0" />
+  </joint>
+  <link
+    name="LWingProx">
+    <inertial>
+      <origin
+        xyz="-0.000122960676808948 0.000122960676809505 0.05715"
+        rpy="0 0 0" />
+      <mass
+        value="0.00289973737344469" />
+      <inertia
+        ixx="1.57843761676966E-06"
+        ixy="2.06594624151742E-13"
+        ixz="1.40117895565942E-09"
+        iyy="1.57843761676966E-06"
+        iyz="1.4011789556595E-09"
+        izz="3.10223662360377E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://BA14/meshes/LWingProx.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://BA14/meshes/LWingProx.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="LShouldExt"
+    type="revolute">
+    <origin
+      xyz="0 0 0.0127"
+      rpy="0 1.5708 0" />
+    <parent
+      link="LWingBase" />
+    <child
+      link="LWingProx" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-1.5"
+      upper="0.3"
+      effort="3"
+      velocity="0" />
+  </joint>
+  <link
+    name="LWingDist">
+    <inertial>
+      <origin
+        xyz="-1.11022302462516E-16 2.59261859203441E-09 0.0825500000000042"
+        rpy="0 0 0" />
+      <mass
+        value="0.00379744567878778" />
+      <inertia
+        ixx="5.25117113046229E-06"
+        ixy="1.0677299088109E-23"
+        ixz="2.80225846379924E-09"
+        iyy="5.24922087107298E-06"
+        iyz="-1.5919446013748E-22"
+        izz="3.8442924080188E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://BA14/meshes/LWingDist.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://BA14/meshes/LWingDist.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="LElbow"
+    type="revolute">
+    <origin
+      xyz="0 0 0.1143"
+      rpy="-1.5708 0 0" />
+    <parent
+      link="LWingProx" />
+    <child
+      link="LWingDist" />
+    <axis
+      xyz="-1 0 0" />
+    <limit
+      lower="-1.3"
+      upper="1.3"
+      effort="3"
+      velocity="0" />
+  </joint>
+  <link
+    name="LWingPhal">
+    <inertial>
+      <origin
+        xyz="7.0733948136642E-05 9.76581676637167E-10 0.119367576821282"
+        rpy="0 0 0" />
+      <mass
+        value="0.00504070190809468" />
+      <inertia
+        ixx="2.41642222633512E-05"
+        ixy="-1.03297312079344E-13"
+        ixz="1.40112923183646E-09"
+        iyy="2.41632471336566E-05"
+        iyz="-4.97237569950302E-14"
+        izz="4.51934144946199E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://BA14/meshes/LWingPhal.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://BA14/meshes/LWingPhal.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="LWrist"
+    type="revolute">
+    <origin
+      xyz="0 0 0.1651"
+      rpy="-1.5708 0 0" />
+    <parent
+      link="LWingDist" />
+    <child
+      link="LWingPhal" />
+    <axis
+      xyz="-1 0 0" />
+    <limit
+      lower="-1.3"
+      upper="1.3"
+      effort="3"
+      velocity="0" />
+  </joint>
+  <link
+    name="RWingBase">
+    <inertial>
+      <origin
+        xyz="-8.91528981195044E-09 -0.000645734028303765 0.00699629548516618"
+        rpy="0 0 0" />
+      <mass
+        value="0.000552160381379266" />
+      <inertia
+        ixx="1.28003109152368E-08"
+        ixy="-1.03297312067074E-13"
+        ixz="-4.97237598611654E-14"
+        iyy="1.37754406098898E-08"
+        iyz="1.40112923189963E-09"
+        izz="8.09062527386859E-09" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://BA14/meshes/RWingBase.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://BA14/meshes/RWingBase.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RShouldRot"
+    type="revolute">
+    <origin
+      xyz="-0.0762 0.06985 0"
+      rpy="1.5708 0 3.1416" />
+    <parent
+      link="torso" />
+    <child
+      link="RWingBase" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="-0.3"
+      upper="1.5"
+      effort="3"
+      velocity="0" />
+  </joint>
+  <link
+    name="RWingProx">
+    <inertial>
+      <origin
+        xyz="0.000122957281556979 0.000122957281556379 0.05715"
+        rpy="0 0 0" />
+      <mass
+        value="0.00289973737344469" />
+      <inertia
+        ixx="1.57843761676966E-06"
+        ixy="2.06594624143565E-13"
+        ixz="-1.40107950813982E-09"
+        iyy="1.57843761676966E-06"
+        iyz="1.40107950813974E-09"
+        izz="3.10223662360377E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://BA14/meshes/RWingProx.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://BA14/meshes/RWingProx.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RShouldExt"
+    type="revolute">
+    <origin
+      xyz="0 0 0.0127"
+      rpy="0 1.5708 0" />
+    <parent
+      link="RWingBase" />
+    <child
+      link="RWingProx" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-1.5"
+      upper="0.3"
+      effort="3"
+      velocity="0" />
+  </joint>
+  <link
+    name="RWingDist">
+    <inertial>
+      <origin
+        xyz="-9.71445146547012E-17 2.5926212288141E-09 0.0825499999999996"
+        rpy="0 0 0" />
+      <mass
+        value="0.00379744567878777" />
+      <inertia
+        ixx="5.25117113046228E-06"
+        ixy="2.44476929149704E-23"
+        ixz="2.80225846379927E-09"
+        iyy="5.24922087107297E-06"
+        iyz="-1.55743591263034E-22"
+        izz="3.84429240801879E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://BA14/meshes/RWingDist.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://BA14/meshes/RWingDist.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RElbow"
+    type="revolute">
+    <origin
+      xyz="0 0 0.1143"
+      rpy="-1.5708 0 3.1416" />
+    <parent
+      link="RWingProx" />
+    <child
+      link="RWingDist" />
+    <axis
+      xyz="-1 0 0" />
+    <limit
+      lower="-1.3"
+      upper="1.3"
+      effort="3"
+      velocity="0" />
+  </joint>
+  <link
+    name="RWingPhal">
+    <inertial>
+      <origin
+        xyz="7.07339481359065E-05 9.76584146883397E-10 0.119367576821284"
+        rpy="0 0 0" />
+      <mass
+        value="0.00504070190809467" />
+      <inertia
+        ixx="2.41642222633512E-05"
+        ixy="-1.03297312071531E-13"
+        ixz="1.40112923196285E-09"
+        iyy="2.41632471336565E-05"
+        iyz="-4.97237570026385E-14"
+        izz="4.51934144946199E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://BA14/meshes/RWingPhal.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://BA14/meshes/RWingPhal.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RWrist"
+    type="revolute">
+    <origin
+      xyz="0 0 0.1651"
+      rpy="-1.5708 0 0" />
+    <parent
+      link="RWingDist" />
+    <child
+      link="RWingPhal" />
+    <axis
+      xyz="-1 0 0" />
+    <limit
+      lower="-1.3"
+      upper="1.3"
+      effort="3"
+      velocity="0" />
+  </joint>
+  <link
+    name="LLegBase">
+    <inertial>
+      <origin
+        xyz="-0.000645734028303757 8.91528980958688E-09 0.00699629548516618"
+        rpy="0 0 0" />
+      <mass
+        value="0.000552160381379267" />
+      <inertia
+        ixx="1.37754406098899E-08"
+        ixy="1.03297312073489E-13"
+        ixz="1.40112923189964E-09"
+        iyy="1.28003109152368E-08"
+        iyz="4.97237598782797E-14"
+        izz="8.09062527386862E-09" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://BA14/meshes/LLegBase.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://BA14/meshes/LLegBase.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="LHipRot"
+    type="revolute">
+    <origin
+      xyz="0.1524 -0.04445 0"
+      rpy="-1.5708 3.1416 3.1416" />
+    <parent
+      link="torso" />
+    <child
+      link="LLegBase" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.6"
+      upper="1.6"
+      effort="3"
+      velocity="0" />
+  </joint>
+  <link
+    name="LLegProx">
+    <inertial>
+      <origin
+        xyz="-0.000122957281556986 -0.000122957281556979 0.05715"
+        rpy="0 0 0" />
+      <mass
+        value="0.0028997373734447" />
+      <inertia
+        ixx="1.57843761676966E-06"
+        ixy="2.06594624131838E-13"
+        ixz="1.40107950813983E-09"
+        iyy="1.57843761676966E-06"
+        iyz="-1.4010795081398E-09"
+        izz="3.10223662360378E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://BA14/meshes/LLegProx.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://BA14/meshes/LLegProx.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="LHipExt"
+    type="revolute">
+    <origin
+      xyz="0 0 0.0127"
+      rpy="1.5708 1.5708 0" />
+    <parent
+      link="LLegBase" />
+    <child
+      link="LLegProx" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-0.3"
+      upper="1.8"
+      effort="3"
+      velocity="0" />
+  </joint>
+  <link
+    name="LLegDist">
+    <inertial>
+      <origin
+        xyz="0.000151879469147971 2.09691432273562E-09 0.0450496061762181"
+        rpy="0 0 0" />
+      <mass
+        value="0.00234757699206543" />
+      <inertia
+        ixx="1.56563730585442E-06"
+        ixy="-1.03297312074645E-13"
+        ixz="1.40112923189557E-09"
+        iyy="1.56466217615977E-06"
+        iyz="-4.9723759427933E-14"
+        izz="2.29317409621691E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://BA14/meshes/LLegDist.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://BA14/meshes/LLegDist.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="LKnee"
+    type="revolute">
+    <origin
+      xyz="0 0 0.1143"
+      rpy="-1.5708 0 0" />
+    <parent
+      link="LLegProx" />
+    <child
+      link="LLegDist" />
+    <axis
+      xyz="-1 0 0" />
+    <limit
+      lower="-1.3"
+      upper="1.3"
+      effort="3"
+      velocity="0" />
+  </joint>
+  <link
+    name="RLegBase">
+    <inertial>
+      <origin
+        xyz="0.000645734028324324 -8.91528982033507E-09 0.00699629548516616"
+        rpy="0 0 0" />
+      <mass
+        value="0.000552160381379264" />
+      <inertia
+        ixx="1.37754406098897E-08"
+        ixy="1.03297312073306E-13"
+        ixz="-1.40112923189963E-09"
+        iyy="1.28003109152367E-08"
+        iyz="-4.97237598676163E-14"
+        izz="8.09062527386858E-09" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://BA14/meshes/RLegBase.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://BA14/meshes/RLegBase.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RHipRot"
+    type="revolute">
+    <origin
+      xyz="0.1524 0.04445 0"
+      rpy="1.5708 0 3.1416" />
+    <parent
+      link="torso" />
+    <child
+      link="RLegBase" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="-1.6"
+      upper="1.6"
+      effort="3"
+      velocity="0" />
+  </joint>
+  <link
+    name="RLegProx">
+    <inertial>
+      <origin
+        xyz="-0.0043411675939694 0.000122962237984026 0.0569817889646333"
+        rpy="0 0 0" />
+      <mass
+        value="0.00289973850332923" />
+      <inertia
+        ixx="1.56949275761373E-06"
+        ixy="2.03907189942025E-13"
+        ixz="1.17137848321769E-07"
+        iyy="1.57843761724558E-06"
+        iyz="1.40118532452803E-09"
+        izz="3.99672490915483E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://BA14/meshes/RLegProx.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://BA14/meshes/RLegProx.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RHipExt"
+    type="revolute">
+    <origin
+      xyz="0 0 0.0127"
+      rpy="0 -1.4955 1.5708" />
+    <parent
+      link="RLegBase" />
+    <child
+      link="RLegProx" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-0.3"
+      upper="1.8"
+      effort="3"
+      velocity="0" />
+  </joint>
+  <link
+    name="RLegDist">
+    <inertial>
+      <origin
+        xyz="0.000151881383622779 -0.000100941724666473 0.0450457842662787"
+        rpy="0 0 0" />
+      <mass
+        value="0.00234757812194996" />
+      <inertia
+        ixx="1.56563730633035E-06"
+        ixy="-1.05532899984093E-10"
+        ixz="1.39714795340752E-09"
+        iyy="1.56463553571617E-06"
+        iyz="3.5333470739199E-10"
+        izz="2.29584051053505E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://BA14/meshes/RLegDist.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://BA14/meshes/RLegDist.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RKnee"
+    type="revolute">
+    <origin
+      xyz="-0.0086006 0 0.11398"
+      rpy="-1.5708 -0.075317 0" />
+    <parent
+      link="RLegProx" />
+    <child
+      link="RLegDist" />
+    <axis
+      xyz="-1 0 0" />
+    <limit
+      lower="-1.3"
+      upper="1.3"
+      effort="3"
+      velocity="0" />
+  </joint>
+</robot>
