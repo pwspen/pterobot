@@ -178,7 +178,7 @@ class Pterobot(PipelineEnv):
     return jp.concatenate([
         position,
         data.qvel,
-        data.cinert[1:].ravel(),
-        data.cvel[1:].ravel(),
-        data.qfrc_actuator,
+        # data.cinert[1:].ravel(),
+        # data.cvel[1:].ravel(),
+        # data.qfrc_actuator,
     ])
