@@ -30,8 +30,8 @@ envs.register_environment(env_name, Pterobot)
 mode = "eval" # "train", "eval", "both"
 policy = "ppo"
 # model_name = f"{policy}_{env_name}"
-model_name = f"ppo_humanoid"
-if mode == "train" or mode == "both":
+model_name = env_name
+if mode == "train" or mode == "both": # Train doesn't work right now
     training_rate = 55000/300 # timesteps per second for pterosaur - human is 100_000/300
     mins_to_train = 0.1
     train_timesteps = training_rate * 60 * 60 * (mins_to_train/60)
@@ -43,7 +43,7 @@ if mode == "train" or mode == "both":
         sys.exit()
 
 if mode == "eval" or mode == "both":
-    model_path = 'policy1.zip'
+    model_path = 'policies/policy1.zip'
     params = model.load_params(model_path)
 
     jit_inference_fn = get_inference_func(model_path, action_size=17, observation_size=356)

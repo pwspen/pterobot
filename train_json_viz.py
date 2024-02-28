@@ -2,17 +2,16 @@ import pandas as pd
 import plotly.graph_objects as go
 import json
 
-# Load JSON data from a file
-file_path = 'policies/train3.json'
-with open(file_path, 'r') as file:
-    json_data = json.load(file)
-
 # Assuming the JSON structure is a dictionary with lists, convert it to a DataFrame
 # If your JSON structure is different, you might need to adjust this part
-df = pd.DataFrame.from_dict(json_data, orient='index')
 
 # Function to create a plotly figure
-def create_figure(df):
+def create_plotly_figure(file_path='train.json'):
+    with open(file_path, 'r') as file:
+        json_data = json.load(file)
+
+    df = pd.DataFrame.from_dict(json_data, orient='index')
+
     fig = go.Figure()
     
     default_visible_metrics = ['eval/episode_forward_reward',
@@ -39,8 +38,6 @@ def create_figure(df):
         legend=dict(traceorder='normal', title_font_family='Arial, sans-serif'),
     )
     
+    fig = create_figure(df)
+    fig.show()
     return fig
-
-# Create and show the figure
-fig = create_figure(df)
-fig.show()
