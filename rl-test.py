@@ -1,27 +1,33 @@
-import gymnasium as gym
-from stable_baselines3 import PPO
-from stable_baselines3.common.vec_env import DummyVecEnv
-from stable_baselines3.common.evaluation import evaluate_policy
-from stable_baselines3.common.monitor import Monitor
 import os
 import sys
+from typing import Optional, Dict, Any
+import mujoco
+from mujoco import mjx
+from mujoco import viewer
+import jax
+from jax import numpy as jp
+# from brax import base
+from brax import envs
+from brax import math
+from brax.base import Base, Motion, Transform
+from brax.envs.base import Env, PipelineEnv, State
+from brax.mjx.base import State as MjxState
+from brax.training.agents.ppo import train as ppo
+from brax.training.agents.ppo import networks as ppo_networks
+from brax.io import html, mjcf, model
+
+from my_brax_utils import get_inference_func
+from pterobot import Pterobot
 
 # Requires fix for gymnasium 0.29: replace solver_iter with solver_niter because of mujoco update, otherwise breaks. Should be fixed in gymnasium 1.0.0
 # try: hopper-v4, humanoid-v4, half-cheetah_v4
 # baseline quadruped: ant-v4
 # pterobot: pterobot-v0
-env_name = 'pterobot-v0'
-
-# Create the environment without specifying render_mode for training
-env = gym.make(env_name)
-env = Monitor(env)  # Wrap the environment with a Monitor for accurate reporting
-env = DummyVecEnv([lambda: env])  # Wrap it in a DummyVecEnv for compatibility with SB3
-
-# Instantiate the agent (model) with the PPO algorithm
-model = PPO("MlpPolicy", env, verbose=1)
+env_name = 'pterobot'
+envs.register_environment(env_name, Pterobot)
 
 # Edit below line
-mode = "both" # "train", "eval", "both"
+mode = "eval" # "train", "eval", "both"
 policy = "ppo"
 # model_name = f"{policy}_{env_name}"
 model_name = f"ppo_humanoid"
@@ -37,22 +43,38 @@ if mode == "train" or mode == "both":
         sys.exit()
 
 if mode == "eval" or mode == "both":
-    PPO.load(model_name, env=env)
+    model_path = 'policy0.zip'
+    params = model.load_params(model_path)
 
-    # Evaluate the trained agent
-    mean_reward, std_reward = evaluate_policy(model, model.get_env(), n_eval_episodes=10)
-    print(f"Mean reward: {mean_reward} +/- {std_reward}")
+    jit_inference_fn = get_inference_func(model_path, action_size=17, observation_size=356)
 
-    # For visualization, create a new environment instance with render_mode='human'
-    env_vis = gym.make(env_name, render_mode='human')
-    env_vis = Monitor(env_vis)  # Wrap the environment with a Monitor for accurate reporting
-    env_vis = DummyVecEnv([lambda: env_vis])  # Wrap it in a DummyVecEnv for compatibility with SB3
+    eval_env = envs.get_environment(env_name)
+    jit_reset = jax.jit(eval_env.reset)
+    jit_step = jax.jit(eval_env.step)
 
-    # Reset the environment for the new visualization instance
-    obs = env_vis.reset()
-    for _ in range(10000):
-        action, _states = model.predict(obs, deterministic=True)
-        obs, rewards, dones, info = env_vis.step(action)
+    # initialize the state
+    rng = jax.random.PRNGKey(0)
+    state = jit_reset(rng)
+    rollout = [state.pipeline_state]
 
-    env_vis.close()
-    env.close()
+    # grab a trajectory
+    n_steps = 50000
+
+    mj_model = eval_env.sys.mj_model
+    mj_data = mujoco.MjData(mj_model)
+
+    ctrl = jp.zeros(mj_model.nu)
+    with viewer.launch_passive(mj_model, mj_data, key_callback=lambda x: 0) as v:
+        while v.is_running():
+            act_rng, rng = jax.random.split(rng)
+
+            obs = eval_env._get_obs(mjx.put_data(mj_model, mj_data), ctrl)
+            ctrl, _ = jit_inference_fn(obs, act_rng)
+
+            mj_data.ctrl = ctrl
+            for _ in range(eval_env._n_frames):
+                mujoco.mj_step(mj_model, mj_data)  # Physics step using MuJoCo mj_step.
+            v.sync()
+
+
+            
