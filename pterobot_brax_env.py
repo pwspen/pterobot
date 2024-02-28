@@ -45,9 +45,9 @@ class Pterobot(PipelineEnv):
   def __init__(
           self,
           xml_file=xml_path,
-          ctrl_cost_weight=0.5,
-          forward_reward_weight=1.0,
-          vertical_reward_weight=0.5,
+          ctrl_cost_weight=0.2,
+          forward_reward_weight=2.0,
+          vertical_reward_weight=1.0,
           healthy_reward=1.0,
           use_contact_forces=False,
           contact_cost_weight=5e-4,
@@ -178,7 +178,7 @@ class Pterobot(PipelineEnv):
     return jp.concatenate([
         position,
         data.qvel,
-        # data.cinert[1:].ravel(),
-        # data.cvel[1:].ravel(),
-        # data.qfrc_actuator,
+        data.cinert[1:].ravel(),
+        data.cvel[1:].ravel(),
+        data.qfrc_actuator,
     ])

@@ -1,13 +1,18 @@
 import xml.etree.ElementTree as ET
 
+# This is a janky workaround because I didn't know how to use/load keyframes - fix!
+
 # MJDATA.TXT is exported from Mujoco Simulator and contains qpos and qvel
 mjdata_file = 'MJDATA.TXT'
 
 # XML file to adjust must already have entries for qpos and qvel in it somewhere.
-xml_to_adjust_pose = 't.xml'
-# If it doesn't, paste this in:
+# Updated_pose will be created from origin file - origin file not modified.
+xml_origin = 't.xml'
+xml_updated_pose = xml_origin.replace('.xml', '_updated_pose.xml')
+
+# If it doesn't have qpos/qvel, paste this into it:
 # <custom>
-# <numeric name="init_qvel" data="" />
+# <numeric name="init_qpos" data="" />
 # <numeric name="init_qvel" data="" />
 # </custom>
 
@@ -51,7 +56,7 @@ with open(mjdata_file, 'r') as file:
 
     qpos, qvel = ' '.join(qpos), ' '.join(qvel)
 
-tree = ET.parse(xml_to_adjust_pose)
+tree = ET.parse(xml_origin)
 root = tree.getroot()
 
 # Iterate through custom/numeric elements and update the 'data' attribute based on the 'name'
@@ -64,8 +69,8 @@ for numeric in root.findall(".//custom/numeric"):
         numeric.set('size', str(len(qpos.split(' '))))
         numeric.set('data', qpos)
 
-tree.write(xml_to_adjust_pose)
-print('Successfully modified')
+tree.write(xml_updated_pose)
+print(f'Pose saved to {xml_updated_pose}')
 
 
 #<custom>

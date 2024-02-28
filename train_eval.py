@@ -16,8 +16,8 @@ from brax.training.agents.ppo import train as ppo
 from brax.training.agents.ppo import networks as ppo_networks
 from brax.io import html, mjcf, model
 
-from my_brax_utils import get_inference_func
-from pterobot import Pterobot
+from brax_inference_func import get_inference_func
+from pterobot_brax_env import Pterobot
 
 # Requires fix for gymnasium 0.29: replace solver_iter with solver_niter because of mujoco update, otherwise breaks. Should be fixed in gymnasium 1.0.0
 # try: hopper-v4, humanoid-v4, half-cheetah_v4
@@ -43,10 +43,11 @@ if mode == "train" or mode == "both":
         sys.exit()
 
 if mode == "eval" or mode == "both":
-    model_path = 'policy0.zip'
+    model_path = 'policy1.zip'
     params = model.load_params(model_path)
 
     jit_inference_fn = get_inference_func(model_path, action_size=17, observation_size=356)
+    # Torso xyzw in radians (orientation), Torso Z, dx/dt(x, y, z), dphi/dt(x, y, z), 17 * 2 = 34 -> 4 + 1 + 3 + 3 + 34 = 45
 
     eval_env = envs.get_environment(env_name)
     jit_reset = jax.jit(eval_env.reset)

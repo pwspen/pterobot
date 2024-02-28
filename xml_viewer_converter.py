@@ -1,12 +1,19 @@
 import time
-
 import mujoco
 import mujoco.viewer
-m = mujoco.MjModel.from_xml_path('C:\Python311\Lib\site-packages\gymnasium\envs\mujoco\\assets\pterobot_v0.xml')
+
+### Usage:
+# Open XML in viewier with this file, then from viewier save MjData,
+# then use update_posed_from_mjdata.py to scan qp and qv -> updates env.py
+# Todo: 
+# convert to using keyframes instead of pasting arrays
+
+m = mujoco.MjModel.from_xml_path('load/pterobot_v0.xml')
 # m = mujoco.MjModel.from_xml_path('posed.xml')
 # m = mujoco.mj_loadModel('mjmodel.mjb')
 # m = mujoco.MjModel.loadModel('mjmodel.mjb')
 # m = mujoco.MjModel.('mjmodel.mjb')
+
 d = mujoco.MjData(m)
 
 # mujoco.mj_saveLastXML('BA14/urdf/Finally.xml', m)
