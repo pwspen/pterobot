@@ -38,6 +38,6 @@ def create_plotly_figure(file_path='train.json'):
         legend=dict(traceorder='normal', title_font_family='Arial, sans-serif'),
     )
     
-    fig = create_figure(df)
+    # fig = create_figure(df)
     fig.show()
     return fig

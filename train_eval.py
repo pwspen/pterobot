@@ -39,8 +39,9 @@ if mode == "train" or mode == "both": # Train doesn't work right now
     model.learn(total_timesteps=train_timesteps)
     model.save(model_name)
     if mode == "train":
-        env.close()
-        sys.exit()
+        pass
+        # env.close()
+        # sys.exit()
 
 if mode == "eval" or mode == "both":
     model_path = 'policies/policy1.zip'
