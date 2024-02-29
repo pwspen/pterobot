@@ -9,8 +9,10 @@
 
 5: changed vel_x to pos_x in reward, 5mil timesteps
 
+6: revert to vel_x, restrict wrist joints, weaken all actuators 5x (100->20), better starting pose
+
 improvement ideas:
-different policy
+different policy - not needed at this stage
 better starting pose
 less powerful motors
 reward edits

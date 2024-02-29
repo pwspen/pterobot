@@ -7,7 +7,7 @@ mjdata_file = 'MJDATA.TXT'
 
 # XML file to adjust must already have entries for qpos and qvel in it somewhere.
 # Updated_pose will be created from origin file - origin file not modified.
-xml_origin = 't.xml'
+xml_origin = 'load/pterobot_v0.xml'
 xml_updated_pose = xml_origin.replace('.xml', '_updated_pose.xml')
 
 # If it doesn't have qpos/qvel, paste this into it:

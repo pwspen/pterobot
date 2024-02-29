@@ -71,8 +71,8 @@ class Pterobot(PipelineEnv):
     self._reset_noise_scale = reset_noise_scale
     self._exclude_current_positions_from_observation = exclude_current_positions_from_observation
 
-    self._init_qpos = np.array([-0.062, 0.033, 0.24, 0.99, -0.011, 0.14, -0.029, 1.2, 0, -0.011, 1.0, 0.011, -0.8, 0.79, 0.98, 0.01, -0.72, 0.81, 0.086, 0, -0.5, 0.03, -0.0028, -0.47])
-    self._init_qvel = np.array([-0.0016, 0, -0.0011, 0.0016, 0.0022, 0.0082, 0.13, 0, -0.0085, -0.014, 0.0052, 0.021, 0.021, -0.0055, 0.0035, 0.03, 0.036, 0.009, 0, 0.0056, 0.0086, -0.0026, 0.012])
+    self._init_qpos = np.array([-0.079, -0.0095, 0.24, 0.99, -0.0012, 0.11, 0.04, 0.85, 0, -0.0043, 0.99, -0.18, -0.5, 0.92, 1.0, -0.12, -0.48, 0.94, -0.0062, -0.0024, -0.58, -0.0057, -0.0017, -0.56])
+    self._init_qvel = np.array([-0.01, 0, -0.0014, -0.0041, -0.0028, 0.0035, -0.016, 0, -0.0081, 0.012, -0.0045, 0.039, 0.028, 0.013, -0.0042, 0.044, 0.027, 0.0048, 0, 0.0052, -0.0032, 0, -0.0016])
 
 
     mj_model = mujoco.MjModel.from_xml_path(xml_file)
@@ -132,7 +132,7 @@ class Pterobot(PipelineEnv):
     com_after = data.subtree_com[1]
     x_pos, y_pos, z_pos = data.q[0:3]
     velocity = (com_after - com_before) / self.dt
-    forward_reward = self._forward_reward_weight * x_pos # Used to be velocity[0] instead of x_pos, but it just learned to throw itself forward instead of walking.
+    forward_reward = self._forward_reward_weight * velocity[0] # Used to be velocity[0] instead of x_pos, but it just learned to throw itself forward instead of walking.
     vertical_reward = self._vertical_reward_weight * z_pos
 
     min_z, max_z = self._healthy_z_range

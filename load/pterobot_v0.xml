@@ -75,7 +75,7 @@
             <geom type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="LWingDist"/>
             <body name="LWingPhal" pos="0 0 0.1651" quat="0.707105 -0.707108 0 0">
               <inertial pos="7.07339e-05 9.76582e-10 0.119368" quat="1 0 -2.90461e-05 0" mass="0.0050407" diaginertia="2.41642e-05 2.41632e-05 4.51933e-08"/>
-              <joint name="LWrist" pos="0 0 0" axis="-1 0 0" range="-1.3 1.3"/>
+              <joint name="LWrist" pos="0 0 0" axis="-1 0 0" range="0.65 1.3"/>
               <geom type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="LWingPhal"/>
             </body>
           </body>
@@ -95,7 +95,7 @@
             <geom type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="RWingDist"/>
             <body name="RWingPhal" pos="0 0 0.1651" quat="0.707105 -0.707108 0 0">
               <inertial pos="7.07339e-05 9.76584e-10 0.119368" quat="1 0 -2.90461e-05 0" mass="0.0050407" diaginertia="2.41642e-05 2.41632e-05 4.51933e-08"/>
-              <joint name="RWrist" pos="0 0 0" axis="-1 0 0" range="-1.3 1.3"/>
+              <joint name="RWrist" pos="0 0 0" axis="-1 0 0" range="0.65 1.3"/>
               <geom type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="RWingPhal"/>
             </body>
           </body>
@@ -134,22 +134,22 @@
     </body>
   </worldbody>
   <actuator>
-    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="NeckUpDown" gear="100"/>
-    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="NeckYaw" gear="100"/>
-    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="HUpDown" gear="100"/>
-    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="LShouldRot" gear="100"/>
-    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="LShouldExt" gear="100"/>
-    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="LElbow" gear="100"/>
-    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="LWrist" gear="100"/>
-    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="RShouldRot" gear="100"/>
-    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="RShouldExt" gear="100"/>
-    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="RElbow" gear="100"/>
-    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="RWrist" gear="100"/>
-    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="LHipRot" gear="100"/>
-    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="LHipExt" gear="100"/>
-    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="LKnee" gear="100"/>
-    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="RHipRot" gear="100"/>
-    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="RHipExt" gear="100"/>
-    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="RKnee" gear="100"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="NeckUpDown" gear="20"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="NeckYaw" gear="20"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="HUpDown" gear="20"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="LShouldRot" gear="20"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="LShouldExt" gear="20"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="LElbow" gear="20"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="LWrist" gear="20"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="RShouldRot" gear="20"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="RShouldExt" gear="20"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="RElbow" gear="20"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="RWrist" gear="20"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="LHipRot" gear="20"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="LHipExt" gear="20"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="LKnee" gear="20"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="RHipRot" gear="20"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="RHipExt" gear="20"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="RKnee" gear="20"/>
   </actuator>
 </mujoco>
