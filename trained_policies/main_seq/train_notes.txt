@@ -1,0 +1,17 @@
+2: brax PPO, converted humanoid env, left settings on default
+
+3:  reward weight changes:
+    ctrl_cost_weight=0.5 -> 0.2,
+    forward_reward_weight=1.0 -> 2.0,
+    vertical_reward_weight=0.5 -> 1.0
+
+4: 30mil timesteps
+
+5: changed vel_x to pos_x in reward, 5mil timesteps
+
+improvement ideas:
+different policy
+better starting pose
+less powerful motors
+reward edits
+simplify meshes for faster runtime
