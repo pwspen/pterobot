@@ -130,9 +130,9 @@ class Pterobot(PipelineEnv):
 
     com_before = data0.subtree_com[1]
     com_after = data.subtree_com[1]
+    x_pos, y_pos, z_pos = data.q[0:3]
     velocity = (com_after - com_before) / self.dt
-    forward_reward = self._forward_reward_weight * velocity[0]
-    z_pos = data.q[2]
+    forward_reward = self._forward_reward_weight * x_pos # Used to be velocity[0] instead of x_pos, but it just learned to throw itself forward instead of walking.
     vertical_reward = self._vertical_reward_weight * z_pos
 
     min_z, max_z = self._healthy_z_range
