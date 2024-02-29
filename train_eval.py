@@ -26,28 +26,30 @@ from pterobot_brax_env import Pterobot
 env_name = 'pterobot'
 envs.register_environment(env_name, Pterobot)
 
-# Edit below line
-mode = "eval" # "train", "eval", "both"
-policy = "ppo"
-# model_name = f"{policy}_{env_name}"
-model_name = env_name
-if mode == "train" or mode == "both": # Train doesn't work right now
-    training_rate = 55000/300 # timesteps per second for pterosaur - human is 100_000/300
-    mins_to_train = 0.1
-    train_timesteps = training_rate * 60 * 60 * (mins_to_train/60)
-    print(f'Estimated training time: {(train_timesteps/training_rate)/60:.2f} m')
-    model.learn(total_timesteps=train_timesteps)
-    model.save(model_name)
-    if mode == "train":
-        pass
+# # Edit below line
+# mode = "eval" # "train", "eval", "both"
+# policy = "ppo"
+# # model_name = f"{policy}_{env_name}"
+# model_name = env_name
+# if mode == "train" or mode == "both": # Train doesn't work right now
+#     training_rate = 55000/300 # timesteps per second for pterosaur - human is 100_000/300
+#     mins_to_train = 0.1
+#     train_timesteps = training_rate * 60 * 60 * (mins_to_train/60)
+#     print(f'Estimated training time: {(train_timesteps/training_rate)/60:.2f} m')
+#     model.learn(total_timesteps=train_timesteps)
+#     model.save(model_name)
+#     if mode == "train":
+#         pass
         # env.close()
         # sys.exit()
 
-if mode == "eval" or mode == "both":
-    model_path = 'policies/policy1.zip'
+# if mode == "eval" or mode == "both":
+#     eval('policies/policy1.zip')
+
+def eval(model_path, env_name):
     params = model.load_params(model_path)
 
-    jit_inference_fn = get_inference_func(model_path, action_size=17, observation_size=356)
+    jit_inference_fn = get_inference_func(model_path, action_size=17, observation_size=45)
     # Torso xyzw in radians (orientation), Torso Z, dx/dt(x, y, z), dphi/dt(x, y, z), 17 * 2 = 34 -> 4 + 1 + 3 + 3 + 34 = 45
 
     eval_env = envs.get_environment(env_name)
@@ -58,9 +60,6 @@ if mode == "eval" or mode == "both":
     rng = jax.random.PRNGKey(0)
     state = jit_reset(rng)
     rollout = [state.pipeline_state]
-
-    # grab a trajectory
-    n_steps = 50000
 
     mj_model = eval_env.sys.mj_model
     mj_data = mujoco.MjData(mj_model)
