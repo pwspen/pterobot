@@ -71,7 +71,7 @@ class Pterobot(PipelineEnv):
     self._reset_noise_scale = reset_noise_scale
     self._exclude_current_positions_from_observation = exclude_current_positions_from_observation
 
-    self._init_qpos = np.array([-0.079, -0.0095, 0.24, 0.99, -0.0012, 0.11, 0.04, 0.85, 0, -0.0043, 0.99, -0.18, -0.5, 0.92, 1.0, -0.12, -0.48, 0.94, -0.0062, -0.0024, -0.58, -0.0057, -0.0017, -0.56])
+    self._init_qpos = np.array([0.0440588, 0.00120683, 0.2395, 0.993669, 0.00301708, 0.111906, -0.00953076, 0.665, 1.2888e-05, -0.00385139, 1.10028, -0.147647, -0.523495, 0.81469, 1.05431, -0.169102, -0.576586, 0.846909, -0.0040244, 0.0349449, -0.63767, 0.0471247, 0.0148329, -0.637677])
     self._init_qvel = np.array([-0.01, 0, -0.0014, -0.0041, -0.0028, 0.0035, -0.016, 0, -0.0081, 0.012, -0.0045, 0.039, 0.028, 0.013, -0.0042, 0.044, 0.027, 0.0048, 0, 0.0052, -0.0032, 0, -0.0016])
 
 
@@ -108,11 +108,11 @@ class Pterobot(PipelineEnv):
     obs = self._get_obs(data, jp.zeros(self.sys.nu))
     reward, done, zero = jp.zeros(3)
     metrics = {
-        'forward_reward': zero,
-        'vertical_reward': zero,
-        'reward_linvel': zero,
-        'reward_quadctrl': zero,
+        'reward_fwd': zero,
+        'reward_vert': zero,
         'reward_alive': zero,
+        'reward_ctrl': zero,
+        'reward_lowvel': zero,
         'x_position': zero,
         'y_position': zero,
         'z_position': zero,
@@ -143,17 +143,18 @@ class Pterobot(PipelineEnv):
     else:
       healthy_reward = self._healthy_reward * is_healthy
 
-    ctrl_cost = self._ctrl_cost_weight * jp.sum(jp.square(action))
+    ctrl_cost = -self._ctrl_cost_weight * jp.sum(jp.square(action))
+    lowvel_cost = -1 / jp.sum(jp.square(velocity))
 
     obs = self._get_obs(data, action)
-    reward = forward_reward + healthy_reward + vertical_reward - ctrl_cost
+    reward = forward_reward + healthy_reward + vertical_reward + ctrl_cost + lowvel_cost
     done = 1.0 - is_healthy if self._terminate_when_unhealthy else 0.0
     state.metrics.update(
-        forward_reward=forward_reward,
-        vertical_reward=vertical_reward,
-        reward_linvel=forward_reward,
-        reward_quadctrl=-ctrl_cost,
+        reward_fwd=forward_reward,
+        reward_vert=vertical_reward,
         reward_alive=healthy_reward,
+        reward_ctrl=ctrl_cost,
+        reward_lowvel=lowvel_cost,
         x_position=com_after[0],
         y_position=com_after[1],
         z_position=com_after[2],

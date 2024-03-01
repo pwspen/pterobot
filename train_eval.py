@@ -64,6 +64,8 @@ def eval(model_path, env_name):
     mj_model = eval_env.sys.mj_model
     mj_data = mujoco.MjData(mj_model)
 
+    mujoco.mj_resetDataKeyframe(mj_model, mj_data, 0)
+
     ctrl = jp.zeros(mj_model.nu)
     with viewer.launch_passive(mj_model, mj_data, key_callback=lambda x: 0) as v:
         while v.is_running():

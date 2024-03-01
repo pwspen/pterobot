@@ -2,7 +2,6 @@
   <compiler angle="radian"/>
   <option integrator="RK4" timestep="0.01"/>
 
-
   <asset>
     <mesh name="torso" file="meshes/torso.STL"/>
     <mesh name="NeckBase" file="meshes/NeckBase.STL"/>
@@ -152,4 +151,9 @@
     <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="RHipExt" gear="20"/>
     <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="RKnee" gear="20"/>
   </actuator>
+
+  <keyframe>
+    <key name="standing" qpos='0.0440588 0.00120683 0.2395 0.993669 0.00301708 0.111906 -0.00953076 0.665 1.2888e-05 -0.00385139 1.10028 -0.147647 -0.523495 0.81469 1.05431 -0.169102 -0.576586 0.846909 -0.0040244 0.0349449 -0.63767 0.0471247 0.0148329 -0.637677'/>
+    <key name="laying" qpos='0.129263 -0.00538754 0.0654573 0.99398 0.000635112 -0.109531 0.00270661 1.05325 -0.0706843 1 -0.3 0.0272182 -1.22721 1.3 -0.29916 -0.0242903 -1.22805 1.3 -0.965661 -0.0973402 0.734632 -0.978928 0.0511153 0.734297'/>
+  </keyframe>
 </mujoco>
