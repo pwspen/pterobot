@@ -11,6 +11,12 @@
 
 6: revert to vel_x, restrict wrist joints, weaken all actuators 5x (100->20), better starting pose
 
+7: add reward_lowvel: -1/vel (encourage movement)
+
+8: reward_lowvel_weight 1.0 -> 0.1
+
+9: reward_lowvel_weight 0.1 -> 0.01 (still has some effect because it blows up as velocity goes to 0)
+
 improvement ideas:
 different policy - not needed at this stage
 better starting pose
