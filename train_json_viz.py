@@ -20,10 +20,11 @@ def create_plotly_figure(file_path='train.json', save_path=None):
 
     fig = go.Figure()
     
-    default_visible_metrics = ['eval/episode_forward_reward',
+    default_visible_metrics = ['eval/episode_reward_fwd',
                                'eval/episode_reward_alive',
-                               'eval/episode_reward_quadctrl',
-                               'eval/episode_vertical_reward',
+                               'eval/episode_reward_ctrl',
+                               'eval/episode_reward_vert',
+                               'eval/episode_reward_lowvel',
                                'eval/episode_reward']
 
     # Add a trace for each column in the DataFrame

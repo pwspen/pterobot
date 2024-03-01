@@ -45,10 +45,11 @@ class Pterobot(PipelineEnv):
   def __init__(
           self,
           xml_file=xml_path,
-          ctrl_cost_weight=0.2,
-          forward_reward_weight=2.0,
-          vertical_reward_weight=1.0,
-          healthy_reward=1.0,
+          reward_fwd_weight=2.0,
+          reward_vert_weight=1.0,
+          reward_alive_weight=1.0,
+          reward_ctrl_weight=0.2,
+          reward_lowvel_weight=0.1,
           use_contact_forces=False,
           contact_cost_weight=5e-4,
           terminate_when_unhealthy=True,
@@ -59,10 +60,12 @@ class Pterobot(PipelineEnv):
           **kwargs,
       ):
     
-    self._ctrl_cost_weight = ctrl_cost_weight
-    self._forward_reward_weight = forward_reward_weight
-    self._vertical_reward_weight = vertical_reward_weight
-    self._healthy_reward = healthy_reward
+    self._reward_fwd_weight = reward_fwd_weight
+    self._reward_vert_weight = reward_vert_weight
+    self._reward_alive_weight = reward_alive_weight
+    self._reward_ctrl_weight = reward_ctrl_weight
+    self._reward_lowvel_weight = reward_lowvel_weight
+
     self._use_contact_forces = use_contact_forces
     self._contact_cost_weight = contact_cost_weight
     self._terminate_when_unhealthy = terminate_when_unhealthy
@@ -132,29 +135,29 @@ class Pterobot(PipelineEnv):
     com_after = data.subtree_com[1]
     x_pos, y_pos, z_pos = data.q[0:3]
     velocity = (com_after - com_before) / self.dt
-    forward_reward = self._forward_reward_weight * velocity[0] # Used to be velocity[0] instead of x_pos, but it just learned to throw itself forward instead of walking.
-    vertical_reward = self._vertical_reward_weight * z_pos
+    reward_fwd = self._reward_fwd_weight * velocity[0] # Used to be velocity[0] instead of x_pos, but it just learned to throw itself forward instead of walking.
+    reward_vert = self._reward_vert_weight * z_pos
 
     min_z, max_z = self._healthy_z_range
     is_healthy = jp.where(z_pos < min_z, 0.0, 1.0)
     is_healthy = jp.where(z_pos > max_z, 0.0, is_healthy)
     if self._terminate_when_unhealthy:
-      healthy_reward = self._healthy_reward
+      reward_alive = self._reward_alive_weight
     else:
-      healthy_reward = self._healthy_reward * is_healthy
+      reward_alive = self._reward_alive_weight * is_healthy
 
-    ctrl_cost = -self._ctrl_cost_weight * jp.sum(jp.square(action))
-    lowvel_cost = -1 / jp.sum(jp.square(velocity))
+    reward_ctrl = -self._reward_ctrl_weight * jp.sum(jp.square(action))
+    reward_lowvel = (-1 / jp.sum(jp.square(velocity))) * self._reward_lowvel_weight
 
     obs = self._get_obs(data, action)
-    reward = forward_reward + healthy_reward + vertical_reward + ctrl_cost + lowvel_cost
+    reward = reward_fwd + reward_alive + reward_vert + reward_ctrl + reward_lowvel
     done = 1.0 - is_healthy if self._terminate_when_unhealthy else 0.0
     state.metrics.update(
-        reward_fwd=forward_reward,
-        reward_vert=vertical_reward,
-        reward_alive=healthy_reward,
-        reward_ctrl=ctrl_cost,
-        reward_lowvel=lowvel_cost,
+        reward_fwd=reward_fwd,
+        reward_vert=reward_vert,
+        reward_alive=reward_alive,
+        reward_ctrl=reward_ctrl,
+        reward_lowvel=reward_lowvel,
         x_position=com_after[0],
         y_position=com_after[1],
         z_position=com_after[2],
