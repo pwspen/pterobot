@@ -6,7 +6,13 @@ import json
 # If your JSON structure is different, you might need to adjust this part
 
 # Function to create a plotly figure
-def create_plotly_figure(file_path='train.json'):
+
+def save_plotly_figure(fig, file_path):
+    with open(file_path, 'w', encoding='utf-8') as f:
+        f.write(fig.to_html())
+
+
+def create_plotly_figure(file_path='train.json', save_path=None):
     with open(file_path, 'r') as file:
         json_data = json.load(file)
 
@@ -38,6 +44,9 @@ def create_plotly_figure(file_path='train.json'):
         legend=dict(traceorder='normal', title_font_family='Arial, sans-serif'),
     )
     
-    # fig = create_figure(df)
-    fig.show()
+    if not save_path:
+        fig.show()
+    else:
+        save_plotly_figure(fig, save_path)
+
     return fig
