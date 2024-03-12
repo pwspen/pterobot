@@ -1,8 +1,8 @@
 # Robotic Pterosaur
 
-![](https://github.com/pwspen/pterobot/stumble.gif)
+![](https://github.com/pwspen/pterobot/blob/master/stumble.gif)   
 
-![](https://github.com/pwspen/pterobot/cad.png)
+![](https://github.com/pwspen/pterobot/blob/master/cad.png)
 
 Pterosaurs were the membrane-winged flying animals that lived alongside the dinosaurs. Their locomotion (walks on 4 legs, flighted) is very interesting, so I want to make a robot that walks (and maybe eventually flies) in the same way.
 
