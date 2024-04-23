@@ -17,6 +17,12 @@
 
 9: reward_lowvel_weight 0.1 -> 0.01 (still matters cause asymptotic), reward_ctrl_weight 0.2 -> 0.05
 
+10: lowvel weight = 0
+
+11: 20m timesteps
+
+12: fwd reward 2.0 -> 3.0
+
 improvement ideas:
 different policy - not needed at this stage
 better starting pose
