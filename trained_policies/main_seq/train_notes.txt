@@ -15,7 +15,7 @@
 
 8: reward_lowvel_weight 1.0 -> 0.1
 
-9: reward_lowvel_weight 0.1 -> 0.01 (still has some effect because it blows up as velocity goes to 0)
+9: reward_lowvel_weight 0.1 -> 0.01 (still matters cause asymptotic), reward_ctrl_weight 0.2 -> 0.05
 
 improvement ideas:
 different policy - not needed at this stage
