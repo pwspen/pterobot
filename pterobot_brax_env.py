@@ -49,7 +49,7 @@ class Pterobot(PipelineEnv):
           reward_vert_weight=1.0,
           reward_alive_weight=1.0,
           reward_ctrl_weight=0.05,
-          reward_lowvel_weight=0.01,
+          reward_lowvel_weight=0.0,
           use_contact_forces=False,
           contact_cost_weight=5e-4,
           terminate_when_unhealthy=True,
