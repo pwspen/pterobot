@@ -54,6 +54,9 @@ class Pterobot(PipelineEnv):
           contact_cost_weight=5e-4,
           terminate_when_unhealthy=True,
           healthy_z_range=(0.2, 10),
+          healthy_xrot_range = (-0.5, 0.5),
+          healthy_yrot_range = (-0.5, 0.5),
+          healthy_zrot_range = (-0.5, 0.5),
           contact_force_range=(-1.0, 1.0),
           reset_noise_scale=0.1,
           exclude_current_positions_from_observation=True,
@@ -70,6 +73,9 @@ class Pterobot(PipelineEnv):
     self._contact_cost_weight = contact_cost_weight
     self._terminate_when_unhealthy = terminate_when_unhealthy
     self._healthy_z_range = healthy_z_range
+    self._healthy_xrot_range = healthy_xrot_range
+    self._healthy_yrot_range = healthy_yrot_range
+    self._healthy_zrot_range = healthy_zrot_range
     self._contact_force_range = contact_force_range
     self._reset_noise_scale = reset_noise_scale
     self._exclude_current_positions_from_observation = exclude_current_positions_from_observation
@@ -129,18 +135,25 @@ class Pterobot(PipelineEnv):
   def step(self, state: State, action: jp.ndarray) -> State:
     """Runs one timestep of the environment's dynamics."""
     data0 = state.pipeline_state
-    data = self.pipeline_step(data0, action)
+    data = self.pipeline_step(data0, action) 
 
     com_before = data0.subtree_com[1]
     com_after = data.subtree_com[1]
     x_pos, y_pos, z_pos = data.q[0:3]
+    x_rot, y_rot, z_rot = data.q[3:6]
     velocity = (com_after - com_before) / self.dt
-    reward_fwd = self._reward_fwd_weight * velocity[0] # Used to be velocity[0] instead of x_pos, but it just learned to throw itself forward instead of walking.
+    reward_fwd = self._reward_fwd_weight * velocity[0]
     reward_vert = self._reward_vert_weight * z_pos
 
     min_z, max_z = self._healthy_z_range
-    is_healthy = jp.where(z_pos < min_z, 0.0, 1.0)
-    is_healthy = jp.where(z_pos > max_z, 0.0, is_healthy)
+    min_xrot, max_xrot = self._healthy_xrot_range
+    min_yrot, max_yrot = self._healthy_yrot_range
+    min_zrot, max_zrot = self._healthy_zrot_range
+    is_healthy = jp.where(max_z > z_pos > min_z, 1, 0)
+    is_healthy = jp.where(max_xrot > x_rot > min_xrot, is_healthy, 0)
+    is_healthy = jp.where(max_yrot > y_rot > min_yrot, is_healthy, 0)
+    is_healthy = jp.where(max_zrot > z_rot > min_zrot, is_healthy, 0)
+
     if self._terminate_when_unhealthy:
       reward_alive = self._reward_alive_weight
     else:
