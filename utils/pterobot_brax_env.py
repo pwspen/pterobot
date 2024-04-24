@@ -53,7 +53,7 @@ class Pterobot(PipelineEnv):
           use_contact_forces=False,
           contact_cost_weight=5e-4,
           terminate_when_unhealthy=True,
-          healthy_z_range=(0.15, 10),
+          healthy_z_range=(0.2, 10),
           contact_force_range=(-1.0, 1.0),
           reset_noise_scale=0.1,
           exclude_current_positions_from_observation=True,
