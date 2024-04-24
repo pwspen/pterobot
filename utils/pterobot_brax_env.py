@@ -139,8 +139,8 @@ class Pterobot(PipelineEnv):
 
     com_before = data0.subtree_com[1]
     com_after = data.subtree_com[1]
-    x_pos, y_pos, z_pos = data.q[0:3]
-    x_rot, y_rot, z_rot = data.q[3:6]
+    x_pos, y_pos, z_pos = data.qpos[0:3]
+    x_rot, y_rot, z_rot = data.qpos[3:6]
     velocity = (com_after - com_before) / self.dt
     reward_fwd = self._reward_fwd_weight * velocity[0]
     reward_vert = self._reward_vert_weight * z_pos
@@ -149,10 +149,15 @@ class Pterobot(PipelineEnv):
     min_xrot, max_xrot = self._healthy_xrot_range
     min_yrot, max_yrot = self._healthy_yrot_range
     min_zrot, max_zrot = self._healthy_zrot_range
-    is_healthy = jp.where(max_z > z_pos > min_z, 1, 0)
-    is_healthy = jp.where(max_xrot > x_rot > min_xrot, is_healthy, 0)
-    is_healthy = jp.where(max_yrot > y_rot > min_yrot, is_healthy, 0)
-    is_healthy = jp.where(max_zrot > z_rot > min_zrot, is_healthy, 0)
+    # is_healthy = jp.where(max_z > z_pos > min_z, 1, 0)
+    # is_healthy = jp.where(max_xrot > x_rot > min_xrot, is_healthy, 0)
+    # is_healthy = jp.where(max_yrot > y_rot > min_yrot, is_healthy, 0)
+    # is_healthy = jp.where(max_zrot > z_rot > min_zrot, is_healthy, 0)
+
+    is_healthy = jp.logical_and(z_pos > min_z, z_pos < max_z)
+    is_healthy = jp.logical_and(is_healthy, jp.logical_and(x_rot > min_xrot, x_rot < max_xrot))
+    is_healthy = jp.logical_and(is_healthy, jp.logical_and(y_rot > min_yrot, y_rot < max_yrot))
+    is_healthy = jp.logical_and(is_healthy, jp.logical_and(z_rot > min_zrot, z_rot < max_zrot))
 
     if self._terminate_when_unhealthy:
       reward_alive = self._reward_alive_weight
