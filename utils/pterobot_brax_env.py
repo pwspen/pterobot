@@ -45,9 +45,9 @@ class Pterobot(PipelineEnv):
   def __init__(
           self,
           xml_file=xml_path,
-          reward_fwd_weight=3.0,
+          reward_fwd_weight=-3.0,
           reward_vert_weight=1.0,
-          reward_alive_weight=1.0,
+          reward_alive_weight=0.5,
           reward_ctrl_weight=0.05,
           reward_lowvel_weight=0.0,
           use_contact_forces=False,
