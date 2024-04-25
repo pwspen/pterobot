@@ -46,7 +46,7 @@ class Pterobot(PipelineEnv):
           self,
           xml_file=xml_path,
           reward_fwd_weight=-2,
-          reward_vert_weight=1.0,
+          reward_vert_weight=0.2,
           reward_alive_weight=0.5,
           reward_ctrl_weight=0.05,
           reward_lowvel_weight=0.0,

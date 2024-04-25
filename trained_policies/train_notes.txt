@@ -27,6 +27,8 @@
 
 13: fwd reward -3.0 -> -2.0, healthy height 0.15 -> 0.19
 
+14: vert_reward 1.0 -> 0.2
+
 improvement ideas:
 different policy - not needed at this stage
 better starting pose
