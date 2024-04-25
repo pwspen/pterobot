@@ -21,7 +21,11 @@
 
 11: 20m timesteps
 
-12: fwd reward 2.0 -> -3.0, alive reward 1.0 -> 0.5 
+12: fwd reward 2.0 -> -3.0, alive reward 1.0 -> 0.5
+
+12.5: add angle constraints - didn't work, removed
+
+13: fwd reward -3.0 -> -2.0, healthy height 0.15 -> 0.19
 
 improvement ideas:
 different policy - not needed at this stage

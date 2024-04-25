@@ -45,7 +45,7 @@ class Pterobot(PipelineEnv):
   def __init__(
           self,
           xml_file=xml_path,
-          reward_fwd_weight=-3.0,
+          reward_fwd_weight=-2,
           reward_vert_weight=1.0,
           reward_alive_weight=0.5,
           reward_ctrl_weight=0.05,
@@ -53,7 +53,7 @@ class Pterobot(PipelineEnv):
           use_contact_forces=False,
           contact_cost_weight=5e-4,
           terminate_when_unhealthy=True,
-          healthy_z_range=(0.2, 10),
+          healthy_z_range=(0.19, 10),
           healthy_xrot_range = (-0.5, 0.5),
           healthy_yrot_range = (-0.5, 0.5),
           healthy_zrot_range = (-0.5, 0.5),
@@ -137,6 +137,8 @@ class Pterobot(PipelineEnv):
     data0 = state.pipeline_state
     data = self.pipeline_step(data0, action) 
 
+
+
     com_before = data0.subtree_com[1]
     com_after = data.subtree_com[1]
     x_pos, y_pos, z_pos = data.qpos[0:3]
@@ -146,18 +148,18 @@ class Pterobot(PipelineEnv):
     reward_vert = self._reward_vert_weight * z_pos
 
     min_z, max_z = self._healthy_z_range
-    min_xrot, max_xrot = self._healthy_xrot_range
-    min_yrot, max_yrot = self._healthy_yrot_range
-    min_zrot, max_zrot = self._healthy_zrot_range
+    # min_xrot, max_xrot = self._healthy_xrot_range
+    # min_yrot, max_yrot = self._healthy_yrot_range
+    # min_zrot, max_zrot = self._healthy_zrot_range
     # is_healthy = jp.where(max_z > z_pos > min_z, 1, 0)
     # is_healthy = jp.where(max_xrot > x_rot > min_xrot, is_healthy, 0)
     # is_healthy = jp.where(max_yrot > y_rot > min_yrot, is_healthy, 0)
     # is_healthy = jp.where(max_zrot > z_rot > min_zrot, is_healthy, 0)
 
     is_healthy = jp.logical_and(z_pos > min_z, z_pos < max_z)
-    is_healthy = jp.logical_and(is_healthy, jp.logical_and(x_rot > min_xrot, x_rot < max_xrot))
-    is_healthy = jp.logical_and(is_healthy, jp.logical_and(y_rot > min_yrot, y_rot < max_yrot))
-    is_healthy = jp.logical_and(is_healthy, jp.logical_and(z_rot > min_zrot, z_rot < max_zrot))
+    # is_healthy = jp.logical_and(is_healthy, jp.logical_and(x_rot > min_xrot, x_rot < max_xrot))
+    # is_healthy = jp.logical_and(is_healthy, jp.logical_and(y_rot > min_yrot, y_rot < max_yrot))
+    # is_healthy = jp.logical_and(is_healthy, jp.logical_and(z_rot > min_zrot, z_rot < max_zrot))
 
     if self._terminate_when_unhealthy:
       reward_alive = self._reward_alive_weight
