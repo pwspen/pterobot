@@ -27,7 +27,9 @@
 
 13: fwd reward -3.0 -> -2.0, healthy height 0.15 -> 0.19
 
-14: vert_reward 1.0 -> 0.2, fwd 2.0 -> 1.0, fwd^ 1 -> 2
+13.5: fwd 2.0 -> 1.0, fwd^ 1 -> 2 (nope, reverted)
+
+14: vert_reward 1.0 -> 0.2, gear 20 -> 10, ctrl cost 0.05 -> 0
 
 improvement ideas:
 different policy - not needed at this stage

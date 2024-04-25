@@ -45,10 +45,10 @@ class Pterobot(PipelineEnv):
   def __init__(
           self,
           xml_file=xml_path,
-          reward_fwd_weight=-1,
+          reward_fwd_weight=-2,
           reward_vert_weight=0.2,
           reward_alive_weight=0.5,
-          reward_ctrl_weight=0.05,
+          reward_ctrl_weight=0.0,
           reward_lowvel_weight=0.0,
           use_contact_forces=False,
           contact_cost_weight=5e-4,
@@ -144,7 +144,7 @@ class Pterobot(PipelineEnv):
     x_pos, y_pos, z_pos = data.qpos[0:3]
     x_rot, y_rot, z_rot = data.qpos[3:6]
     velocity = (com_after - com_before) / self.dt
-    reward_fwd = (self._reward_fwd_weight * velocity[0])**2
+    reward_fwd = (self._reward_fwd_weight * velocity[0])
     reward_vert = self._reward_vert_weight * z_pos
 
     min_z, max_z = self._healthy_z_range

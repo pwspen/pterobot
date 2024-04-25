@@ -133,23 +133,23 @@
     </body>
   </worldbody>
   <actuator>
-    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="NeckUpDown" gear="20"/>
-    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="NeckYaw" gear="20"/>
-    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="HUpDown" gear="20"/>
-    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="LShouldRot" gear="20"/>
-    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="LShouldExt" gear="20"/>
-    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="LElbow" gear="20"/>
-    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="LWrist" gear="20"/>
-    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="RShouldRot" gear="20"/>
-    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="RShouldExt" gear="20"/>
-    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="RElbow" gear="20"/>
-    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="RWrist" gear="20"/>
-    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="LHipRot" gear="20"/>
-    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="LHipExt" gear="20"/>
-    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="LKnee" gear="20"/>
-    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="RHipRot" gear="20"/>
-    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="RHipExt" gear="20"/>
-    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="RKnee" gear="20"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="NeckUpDown" gear="10"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="NeckYaw" gear="10"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="HUpDown" gear="10"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="LShouldRot" gear="10"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="LShouldExt" gear="10"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="LElbow" gear="10"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="LWrist" gear="10"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="RShouldRot" gear="10"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="RShouldExt" gear="10"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="RElbow" gear="10"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="RWrist" gear="10"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="LHipRot" gear="10"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="LHipExt" gear="10"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="LKnee" gear="10"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="RHipRot" gear="10"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="RHipExt" gear="10"/>
+    <motor ctrllimited="true" ctrlrange="-1.0 1.0" joint="RKnee" gear="10"/>
   </actuator>
 
   <keyframe>
