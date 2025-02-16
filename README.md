@@ -1,11 +1,7 @@
-# bitlab-ai
+I made a simplified model of a pterosaur and trained it using reinforcement learning. I used Mujoco, Brax (with MJX) and JAX. Included in this repo are the actual training script to run on Google Colab (Pterobot_Train.ipynb) and various other utility scripts.
 
-https://aider.chat/
+This was the final project in a machine learning class.
 
-https://github.com/pwspen/pterobot
+I aim to pick this back up at some point to actually get a nice walking gait, instead of the current best result I got, [which is head-walking.](https://synapsomorphy.com/headwalk.html)
 
-https://github.com/pwspen/vlmcar
-
-https://www.newyorker.com/magazine/2024/12/02/a-revolution-in-how-robots-learn
-
-https://harimus.github.io//2024/05/31/motortask.html
+[More info here](https://synapsomorphy.com/blog/pterobot/)
